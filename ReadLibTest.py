@@ -2,6 +2,7 @@ import unittest
 import ReadLib
 import numpy as np
 
+
 class ReadLibTest(unittest.TestCase):
 
     def test_should_read_correct_data(self):
