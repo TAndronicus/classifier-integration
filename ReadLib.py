@@ -64,6 +64,8 @@ def read_2018_07_02(filename: str = "Filtr_2_07_2018.xlsx", p: int = 1):
         for i in range(1, 9):
             row.append(float(line[i].value))
         number_of_set = int(line[10].value) - 1
+        if int(float(line[9].value)) == 1:
+            print("Found")
         if int(line[11].value) == 0:
             X[number_of_set].append(row)
             y[number_of_set].append(int(float(line[9].value)))
