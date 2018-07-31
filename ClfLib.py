@@ -30,6 +30,7 @@ def train_clfs(clfs: [], dataset: Dataset):
         trained_clfs.append(clf)
     return trained_clfs
 
+
 def validate(clfs: [], dataset: Dataset, opts: Opts):
     scores, weights = [], []
     if opts.weight_type in [WeightType.SCORE]:
@@ -38,3 +39,15 @@ def validate(clfs: [], dataset: Dataset, opts: Opts):
     if opts.weight_type == WeightType.SCORE:
         weights = scores
     return weights
+
+
+def select(clfs: [], weights: [], opts: Opts):
+    selected_clfs, selected_weights = [], []
+    tups = []
+    for clf, weight in zip(clfs, weights):
+        tups.append((weight, clf))
+    tups.sort(key = lambda pair: pair[0])
+    for i in range(1, opts.number_of_selected_clfs + 1):
+        selected_clfs.append(tups[-i][1])
+        selected_weights.append(tups[-i][0])
+    return selected_clfs, selected_weights
