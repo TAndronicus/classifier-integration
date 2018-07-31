@@ -33,11 +33,13 @@ def train_clfs(clfs: [], dataset: Dataset):
 
 def validate(clfs: [], dataset: Dataset, opts: Opts):
     scores, weights = [], []
-    if opts.weight_type in [WeightType.SCORE]:
+    if opts.weight_type in [WeightType.SCORE, WeightType.HALFSCORE]:
         for clf, X_val, y_val in zip(clfs, dataset.validation_sets_X, dataset.validation_sets_y):
             scores.append(clf.score(X_val, y_val))
     if opts.weight_type == WeightType.SCORE:
         weights = scores
+    elif opts.weight_type == WeightType.HALFSCORE:
+        weights[:] = [2 * (i - .5) for i in scores]
     return weights
 
 
