@@ -1,4 +1,5 @@
 from ClfType import ClfType
+from WeightType import WeightType
 
 
 class Opts:
@@ -9,6 +10,8 @@ class Opts:
     def __init__(self,
                  type_of_clf: ClfType,
                  number_of_subspaces: int,
+                 weight_type: WeightType,
                  ):
         self.type_of_clf = type_of_clf
         self.number_of_subspaces = number_of_subspaces
+        self.weight_type = weight_type
