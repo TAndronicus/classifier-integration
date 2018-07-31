@@ -1,6 +1,8 @@
 from xlrd import open_workbook
 from ClfUtils import initialize_list_of_lists
 from Dataset import Dataset
+from sklearn.feature_selection import SelectKBest
+import numpy as np
 
 def read_data_file(filename: str):
     """Reads data from given file
@@ -70,5 +72,12 @@ def read_2018_07_02(filename: str = "Filtr_2_07_2018.xlsx", p: int = 1):
         else:
             X_test[number_of_set].append(row)
             y_test[number_of_set].append(int(float(line[9].value)))
+    select_features(X, X_test)
     return Dataset(X, y, X, y, X_test, y_test)
 
+
+def select_features(X, X_test):
+    print(X)
+    X = np.array(X)
+    X.flatten()
+    print(X)
